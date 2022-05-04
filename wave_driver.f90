@@ -25,7 +25,17 @@ program wave_driver
     !   Namelist declarations for input parameters.
     !-----------------------------------------------------------------------
 
-    !   FILL HERE
+    namelist /wave_inp/ density_type,rho0,r_max,t_initial,t_final,&
+                        n_rad,n_theta,num_modes
+
+    !-----------------------------------------------------------------------
+    !   Read namelist from file wave_input.dat.
+    !-----------------------------------------------------------------------
+
+    OPEN(UNIT=nml_unit,FILE="wave_inp.dat",STATUS="OLD",&
+        FORM="FORMATTED")
+    READ(UNIT=nml_unit,NML=wave_inp)
+    CLOSE(nml_unit)
 
     !-----------------------------------------------------------------------
     !   Start the timer and call the data initialisation routine.
@@ -33,13 +43,7 @@ program wave_driver
 
     call timer(time_st)
     call wave_data_init
-
-    !-----------------------------------------------------------------------
-    !   Read namelist from file wave_input.dat.
-    !-----------------------------------------------------------------------
-
-    !   FILL HERE
-
+    
     !-----------------------------------------------------------------------
     !   Open data files to write eigenvalues and eigenvectors to.
     !-----------------------------------------------------------------------
