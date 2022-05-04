@@ -39,8 +39,8 @@ module wave_inp_mod
     !   eigenvectors are to be computed.
     !-----------------------------------------------------------------------
 
-    integer(iknd) :: n_rad=50_iknd
-    integer(iknd) :: n_theta=32_iknd
+    integer(iknd) :: n_rad=20_iknd
+    integer(iknd) :: n_theta=16_iknd
     integer(iknd) :: num_modes=10_iknd
 
     !-----------------------------------------------------------------------

@@ -64,7 +64,11 @@ program wave_driver
                v_right,LDVR,WORK,LWORK,INFO)
 
     write(*,*) "DGEEV result: ", INFO
-    
+
+    write(*,*) "WI: ", w_im
+
+    write(*,*) "WR: ", w_r
+
     call timer(time_en)
     write(*,*) "Time taken: ", (time_en - time_st), " seconds."
 
