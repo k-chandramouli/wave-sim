@@ -41,6 +41,14 @@ program wave_driver
     !   FILL HERE
 
     !-----------------------------------------------------------------------
+    !   Open data files to write eigenvalues and eigenvectors to.
+    !-----------------------------------------------------------------------
+
+    open(unit=eigval_unit,file='eigenvalues.dat',status='unknown')
+    open(unit=r_eigvec_unit,file='right_eigenvectors.dat',status='unknown')
+    open(unit=l_eigvec_unit,file='left_eigenvectors.dat',status='unknown')
+
+    !-----------------------------------------------------------------------
     !   Call subroutine to populate FD Laplacian matrix
     !-----------------------------------------------------------------------
 
@@ -51,7 +59,7 @@ program wave_driver
     !   eigenvalues and eigenvectors
     !-----------------------------------------------------------------------
 
-    JOBVL='N'
+    JOBVL='V'
     JOBVR='V'
     
     LWORK = 5*n_nodes
@@ -63,13 +71,43 @@ program wave_driver
     call dgeev(JOBVL,JOBVR,n_nodes,lap_mat,LDA,w_r,w_im,v_left,LDVL,&
                v_right,LDVR,WORK,LWORK,INFO)
 
+    call wave_write
+
     write(*,*) "DGEEV result: ", INFO
 
-    write(*,*) "WI: ", w_im
+    ! write(*,*) "WI: ", w_im
 
-    write(*,*) "WR: ", w_r
+    ! write(*,*) "WR: ", w_r
 
     call timer(time_en)
     write(*,*) "Time taken: ", (time_en - time_st), " seconds."
 
 end program
+
+!=======================================================================
+!   Subroutine wave_write writes the dependent variable for analysis
+!   and plotting
+!=======================================================================
+
+subroutine wave_write
+
+    use wave_kind_mod
+    use wave_inp_mod
+    use wave_data_mod
+    use wave_io_mod
+    implicit none
+
+    integer(iknd) :: ix,jx
+
+    do ix=1,n_nodes
+        write(eigval_unit,'(es14.6)') w_r(ix)
+        do jx=1,n_nodes-1
+            write(r_eigvec_unit,'(es14.6)',ADVANCE="NO") v_right(jx,ix)
+            write(l_eigvec_unit,'(es14.6)',ADVANCE="NO") v_left(jx,ix)
+        end do
+        write(r_eigvec_unit,'(es14.6)') v_right(n_nodes,ix)
+        write(l_eigvec_unit,'(es14.6)') v_left(n_nodes,ix)
+    end do
+
+    return
+end subroutine wave_write
