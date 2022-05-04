@@ -10,7 +10,8 @@ module wave_io_mod
 
     integer(iknd), parameter :: rmesh_unit=10
     integer(iknd), parameter :: thetamesh_unit=11
-    integer(iknd), parameter :: eigenval_unit=12
-    integer(iknd), parameter :: eigenvec_unit=13
+    integer(iknd), parameter :: eigval_unit=12
+    integer(iknd), parameter :: r_eigvec_unit=13
+    integer(iknd), parameter :: l_eigvec_unit=14
 
 end module wave_io_mod
