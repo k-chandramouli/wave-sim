@@ -13,5 +13,6 @@ module wave_io_mod
     integer(iknd), parameter :: eigval_unit=12
     integer(iknd), parameter :: r_eigvec_unit=13
     integer(iknd), parameter :: l_eigvec_unit=14
+    integer(iknd), parameter :: nml_unit=15
 
 end module wave_io_mod
