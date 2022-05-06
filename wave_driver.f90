@@ -53,7 +53,7 @@ program wave_driver
         WRITE(rad_mesh_unit,'(es12.5)') rad_mesh(i_rad)
     end do
     do j_ang=1,n_theta
-        WRITE(ang_mesh_unit,'(es12.5)') ang_mesh(i_rad)
+        WRITE(ang_mesh_unit,'(es12.5)') ang_mesh(j_ang)
     end do
 
     !-----------------------------------------------------------------------
@@ -78,8 +78,9 @@ program wave_driver
     JOBVL='V'
     JOBVR='V'
     
-    LWORK = 5*n_nodes
-    allocate(WORK(LWORK))
+    ! LWORK = 5*n_nodes
+    ! allocate(WORK(LWORK))
+    LWORK=0
     LDA = n_nodes
     LDVL = n_nodes
     LDVR = n_nodes
