@@ -56,4 +56,6 @@ subroutine wave_fdlap_mat
         lap_mat(k,k-n_theta) = -1*(b - a)
     end do
 
+    write(*,*) "Laplacian matrix created"
+
 end subroutine wave_fdlap_mat

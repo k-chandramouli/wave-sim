@@ -16,10 +16,12 @@ module wave_data_mod
     real(rknd) :: pi,twopi
 
     !------------------------------------------------------------------
-    !   Radial and angular step values.
+    !   Radial and angular mesh arrays and step values.
     !------------------------------------------------------------------
 
     real(rknd) :: dr,dtheta
+    real(rknd), dimension(:), allocatable :: rad_mesh
+    real(rknd), dimension(:), allocatable :: ang_mesh
 
     !------------------------------------------------------------------
     !   Displacement array, mode frequency array and 
@@ -49,8 +51,12 @@ module wave_data_mod
         pi=acos(-1._rknd)
         twopi=2._rknd*pi
 
-        dr = r_max/(n_rad+1)
+        dr = r_max/(n_rad+2)
         dtheta = twopi/n_theta
+
+        !--------------------------------------------------------------
+        !   Allocate eigenvalue, eigenvectors and Laplacian arrays
+        !--------------------------------------------------------------
 
         n_nodes = n_rad * n_theta + 1
         allocate(w_r(n_nodes))
@@ -59,6 +65,21 @@ module wave_data_mod
         allocate(v_left(n_nodes,n_nodes))
         allocate(lap_mat(n_nodes,n_nodes))
         lap_mat = 0
+
+        !--------------------------------------------------------------
+        !   Allocate and fill mesh arrays
+        !--------------------------------------------------------------
+
+        allocate(rad_mesh(n_rad+2))
+        allocate(ang_mesh(n_theta))
+
+        do i_rad=0,n_rad+1
+            rad_mesh(i_rad+1) = (i_rad)*dr
+        end do
+
+        do j_ang=0,n_theta-1
+            ang_mesh(j_ang+1) = j_ang*dtheta
+        end do
 
         !--------------------------------------------------------------
         !   Allocate initial displacement array

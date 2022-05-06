@@ -20,6 +20,8 @@ program wave_driver
     integer(iknd) :: LDA,LDVL,LDVR,LWORK,INFO
     real(rknd), dimension(:), allocatable :: WORK
 
+    integer(iknd) :: i_rad,j_ang
+
 
     !-----------------------------------------------------------------------
     !   Namelist declarations for input parameters.
@@ -38,12 +40,22 @@ program wave_driver
     CLOSE(nml_unit)
 
     !-----------------------------------------------------------------------
-    !   Start the timer and call the data initialisation routine.
+    !   Start the timer, call the data initialisation routine and write
+    !   the radial and angular mesh values to file for plotting
     !-----------------------------------------------------------------------
 
     call timer(time_st)
     call wave_data_init
-    
+
+    OPEN(UNIT=rad_mesh_unit,FILE='rad_mesh.dat',STATUS='UNKNOWN')
+    OPEN(UNIT=ang_mesh_unit,FILE='ang_mesh.dat',STATUS='UNKNOWN')
+    do i_rad=1,n_rad+2
+        WRITE(rad_mesh_unit,'(es12.5)') rad_mesh(i_rad)
+    end do
+    do j_ang=1,n_theta
+        WRITE(ang_mesh_unit,'(es12.5)') ang_mesh(i_rad)
+    end do
+
     !-----------------------------------------------------------------------
     !   Open data files to write eigenvalues and eigenvectors to.
     !-----------------------------------------------------------------------
@@ -78,10 +90,6 @@ program wave_driver
     call wave_write
 
     write(*,*) "DGEEV result: ", INFO
-
-    ! write(*,*) "WI: ", w_im
-
-    ! write(*,*) "WR: ", w_r
 
     call timer(time_en)
     write(*,*) "Time taken: ", (time_en - time_st), " seconds."
