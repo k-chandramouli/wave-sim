@@ -77,10 +77,8 @@ program wave_driver
 
     JOBVL='V'
     JOBVR='V'
-    
-    ! LWORK = 5*n_nodes
-    ! allocate(WORK(LWORK))
-    LWORK=0
+    LWORK = 5*n_nodes
+    allocate(WORK(LWORK))
     LDA = n_nodes
     LDVL = n_nodes
     LDVR = n_nodes
