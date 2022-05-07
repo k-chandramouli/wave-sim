@@ -33,7 +33,8 @@ LDRFLAGS =
 # Library paths and libraries can be listed here.
 
 LIBDIR =  -L/usr/local/lib
-LIBS = -llapack -lblas
+# LIBS = -llapack -lblas
+LIBS = -lopenblas -lpthread
 
 #-----------------------------------------------------------------------
 
