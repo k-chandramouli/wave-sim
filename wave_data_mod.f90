@@ -51,7 +51,7 @@ module wave_data_mod
         pi=acos(-1._rknd)
         twopi=2._rknd*pi
 
-        dr = r_max/(n_rad+2)
+        dr = r_max/(n_rad+1)
         dtheta = twopi/n_theta
 
         !--------------------------------------------------------------

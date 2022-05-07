@@ -27,7 +27,7 @@ program wave_driver
     !   Namelist declarations for input parameters.
     !-----------------------------------------------------------------------
 
-    namelist /wave_inp/ density_type,rho0,r_max,t_initial,t_final,&
+    namelist /wave_inp/ density_type,rho0,c0,r_max,t_initial,t_final,&
                         n_rad,n_theta,num_modes
 
     !-----------------------------------------------------------------------

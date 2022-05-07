@@ -16,6 +16,7 @@ module wave_inp_mod
 
     character(16) :: density_type="constant"
     real(rknd) :: rho0=1._rknd
+    real(rknd) :: c0=1._rknd
 
     !-----------------------------------------------------------------------
     !   Set the maximum radius of the membrane (in m) and the initial and
@@ -40,7 +41,7 @@ module wave_inp_mod
     !-----------------------------------------------------------------------
 
     integer(iknd) :: n_rad=50_iknd
-    integer(iknd) :: n_theta=64_iknd
+    integer(iknd) :: n_theta=8_iknd
     integer(iknd) :: num_modes=10_iknd
 
     !-----------------------------------------------------------------------
