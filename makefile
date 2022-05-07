@@ -43,7 +43,7 @@ LIBS = -lopenblas -lpthread
 # that the line is continued.
 
 OBJS = wave_kind_mod.o wave_inp_mod.o wave_io_mod.o wave_data_mod.o \
-	   wave_timer.o wave_fdlap_mat.o wave_driver.o
+	   wave_timer.o wave_fdlap_mat.o wave_rho.o wave_driver.o
 
 MODS = wave_kind_mod.mod wave_inp_mod.mod wave_io_mod.mod wave_data_mod.mod
 
@@ -86,7 +86,8 @@ $(MODS) : %.mod : %.f90
 wave_io_mod.o: wave_kind_mod.mod
 wave_inp_mod.o: wave_kind_mod.mod
 wave_data_mod.o: wave_kind_mod.mod wave_inp_mod.mod
-wave_fdlap+mat.o: wave_kind_mod.mod wave_inp_mod.mod wave_data_mod.mod
+wave_fdlap_mat.o: wave_kind_mod.mod wave_inp_mod.mod wave_data_mod.mod
+wave_rho.o: wave_kind_mod.mod wave_inp_mod.mod
 wave_time.o: wave_kind_mod.mod
 wave_driver.o: wave_kind_mod.mod wave_io_mod.mod wave_inp_mod.mod \
           wave_data_mod.mod

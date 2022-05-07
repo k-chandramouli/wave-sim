@@ -11,12 +11,16 @@ module wave_inp_mod
 
     !-----------------------------------------------------------------------
     !   Density is set based on the density_type parameter, which
-    !   can be either constant or variable.
+    !   can be either constant or variable. Also set default value for
+    !   2-stage density radius boundary.
     !-----------------------------------------------------------------------
 
     character(16) :: density_type="constant"
     real(rknd) :: rho0=1._rknd
+    real(rknd) :: rho1=1._rknd
     real(rknd) :: c0=1._rknd
+    real(rknd) :: d0=1._rknd
+    real(rknd) :: rho_bdry=0.3_rknd
 
     !-----------------------------------------------------------------------
     !   Set the maximum radius of the membrane (in m) and the initial and
