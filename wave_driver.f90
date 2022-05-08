@@ -68,7 +68,13 @@ program wave_driver
     !   Call subroutine to populate FD Laplacian matrix
     !-----------------------------------------------------------------------
 
-    call wave_fdlap_mat
+    if (fd_type == "first") then
+        call wave_fdlap_mat
+    else if (fd_type == "second") then
+        call wave_fdlap_mat2
+    else
+        write(*,*) "Finite difference type not recognised!"
+    end if
 
     !-----------------------------------------------------------------------
     !   Set up and call LAPACK routine to find

@@ -24,9 +24,11 @@ module wave_inp_mod
 
     !-----------------------------------------------------------------------
     !   Set the maximum radius of the membrane (in m) and the initial and
-    !   final times (in s).
+    !   final times (in s). Also set default value for order of finite
+    !   differencing used.
     !-----------------------------------------------------------------------
 
+    character(16) :: fd_type="second"
     real(rknd) :: r_max=1._rknd
     real(rknd) :: t_initial=0._rknd
     real(rknd) :: t_final=1._rknd
