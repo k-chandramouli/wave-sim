@@ -92,9 +92,9 @@ program wave_driver
     call dgeev(JOBVL,JOBVR,n_nodes,lap_mat,LDA,w_r,w_im,v_left,LDVL,&
                v_right,LDVR,WORK,LWORK,INFO)
 
-    call wave_write
-
     write(*,*) "DGEEV result: ", INFO
+
+    call wave_write
 
     call timer(time_en)
     write(*,*) "Time taken: ", (time_en - time_st), " seconds."
@@ -117,13 +117,13 @@ subroutine wave_write
     integer(iknd) :: ix,jx
 
     do ix=1,n_nodes
-        write(eigval_unit,'(es14.6)') w_r(ix)
+        write(eigval_unit,'(es20.10e4)') w_r(ix)
         do jx=1,n_nodes-1
-            write(r_eigvec_unit,'(es14.6)',ADVANCE="NO") v_right(jx,ix)
-            write(l_eigvec_unit,'(es14.6)',ADVANCE="NO") v_left(jx,ix)
+            write(r_eigvec_unit,'(es20.10e4)',ADVANCE="NO") v_right(jx,ix)
+            write(l_eigvec_unit,'(es20.10e4)',ADVANCE="NO") v_left(jx,ix)
         end do
-        write(r_eigvec_unit,'(es14.6)') v_right(n_nodes,ix)
-        write(l_eigvec_unit,'(es14.6)') v_left(n_nodes,ix)
+        write(r_eigvec_unit,'(es20.10e4)') v_right(n_nodes,ix)
+        write(l_eigvec_unit,'(es20.10e4)') v_left(n_nodes,ix)
     end do
 
     return
