@@ -24,7 +24,7 @@ subroutine wave_fdlap_mat
         c = (1._rknd/(dr*dtheta)**2)*c0**2
         lap_mat(1,1) = n_theta*b
         do k=2,n_theta+1
-            lap_mat(1,k) = b
+            lap_mat(1,k) = -b
             lap_mat(k,k) = 2*(b + c)
             if(mod(k,n_theta) == 2) then ! angle index = 1
                 lap_mat(k,k+1) = -c
@@ -99,7 +99,7 @@ subroutine wave_fdlap_mat
         c = (1._rknd/(dr*dtheta)**2)*d0**2/rho
         lap_mat(1,1) = n_theta*b
         do k=2,n_theta+1
-            lap_mat(1,k) = b
+            lap_mat(1,k) = -b
             lap_mat(k,k) = 2*(b + c)
             if(mod(k,n_theta) == 2) then ! angle index = 1
                 lap_mat(k,k+1) = -c

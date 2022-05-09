@@ -24,7 +24,7 @@ subroutine wave_fdlap_mat2
         c = (1._rknd/(dr*dtheta)**2)*c0**2
         lap_mat(1,1) = n_theta*b
         do k=2,n_theta/2+1
-            lap_mat(1,k) = b
+            lap_mat(1,k) = -b
             lap_mat(k,k) = (15._rknd/6._rknd)*b + 2*c
             if(mod(k,n_theta) == 2) then ! angle index = 1
                 lap_mat(k,k+1) = -c
@@ -43,7 +43,7 @@ subroutine wave_fdlap_mat2
         end do
 
         do k=n_theta/2+2,n_theta+1
-            lap_mat(1,k) = b
+            lap_mat(1,k) = -b
             lap_mat(k,k) = (15._rknd/6._rknd)*b + 2*c
             if(mod(k,n_theta) == 2) then ! angle index = 1
                 lap_mat(k,k+1) = -c
@@ -62,14 +62,15 @@ subroutine wave_fdlap_mat2
         end do
 
         !-----------------------------------------------------------------------
-        !   Fill matrix for points on the second circumference
+        !   Fill matrix for points on the third circumference to second from
+        !   last circumference
         !-----------------------------------------------------------------------
         
-        do k=n_theta+2,n_nodes-2*n_theta
+        do k=n_theta+2,2*n_theta+1
             i = (k-2)/n_theta + 1 ! retrive radial index
             a = (1._rknd/(i*dr**2))*c0**2
             b = (1._rknd/dr**2)*c0**2
-            c = (1._rknd/(dr*dtheta)**2)*c0**2
+            c = (1._rknd/(i*dr*dtheta)**2)*c0**2
 
             lap_mat(k,k) = (15._rknd/6._rknd)*b + 2*c
             if(mod(k,n_theta) == 2) then ! angle index = 1
@@ -92,11 +93,11 @@ subroutine wave_fdlap_mat2
         !   Fill matrix for points from third circumference to
         !   second from last circumference
         !-----------------------------------------------------------------------
-        do k=n_theta+2,n_nodes-2*n_theta
+        do k=2*n_theta+2,n_nodes-2*n_theta
             i = (k-2)/n_theta + 1 ! retrive radial index
             a = (1._rknd/(i*dr**2))*c0**2
             b = (1._rknd/dr**2)*c0**2
-            c = (1._rknd/(dr*dtheta)**2)*c0**2
+            c = (1._rknd/(i*dr*dtheta)**2)*c0**2
 
             lap_mat(k,k) = (15._rknd/6._rknd)*b + 2*c
             if(mod(k,n_theta) == 2) then ! angle index = 1
@@ -122,7 +123,7 @@ subroutine wave_fdlap_mat2
             i = (k-2)/n_theta + 1 ! retrive radial index
             a = (1._rknd/(i*dr**2))*c0**2
             b = (1._rknd/dr**2)*c0**2
-            c = (1._rknd/(dr*dtheta)**2)*c0**2
+            c = (1._rknd/(i*dr*dtheta)**2)*c0**2
 
             lap_mat(k,k) = (15._rknd/6._rknd)*b + 2*c
             if(mod(k,n_theta) == 2) then ! angle index = 1
@@ -147,7 +148,7 @@ subroutine wave_fdlap_mat2
             i = (k-2)/n_theta + 1 ! retrive radial index
             a = (1._rknd/(i*dr**2))*c0**2
             b = (1._rknd/dr**2)*c0**2
-            c = (1._rknd/(dr*dtheta)**2)*c0**2
+            c = (1._rknd/(i*dr*dtheta)**2)*c0**2
 
             lap_mat(k,k) = 2*(b + c)
             if(mod(k,n_theta) == 2) then ! angle index = 1
@@ -174,7 +175,7 @@ subroutine wave_fdlap_mat2
         c = (1._rknd/(dr*dtheta)**2)*d0**2/rho
         lap_mat(1,1) = n_theta*b
         do k=2,n_theta/2+1
-            lap_mat(1,k) = b
+            lap_mat(1,k) = -b
             lap_mat(k,k) = (15._rknd/6._rknd)*b + 2*c
             if(mod(k,n_theta) == 2) then ! angle index = 1
                 lap_mat(k,k+1) = -c
@@ -193,7 +194,7 @@ subroutine wave_fdlap_mat2
         end do
 
         do k=n_theta/2+2,n_theta+1
-            lap_mat(1,k) = b
+            lap_mat(1,k) = -b
             lap_mat(k,k) = (15._rknd/6._rknd)*b + 2*c
             if(mod(k,n_theta) == 2) then ! angle index = 1
                 lap_mat(k,k+1) = -c
@@ -215,12 +216,12 @@ subroutine wave_fdlap_mat2
         !   Fill matrix for points on the second circumference
         !-----------------------------------------------------------------------
 
-        do k=n_theta+2,n_nodes-2*n_theta
+        do k=n_theta+2,2*n_theta*1
             i = (k-2)/n_theta + 1 ! retrive radial index
             rho = wave_rho(i*dr)
             a = (1._rknd/(i*dr**2))*d0**2/rho
             b = (1._rknd/dr**2)*d0**2/rho
-            c = (1._rknd/(dr*dtheta)**2)*d0**2/rho
+            c = (1._rknd/(i*dr*dtheta)**2)*d0**2/rho
 
             lap_mat(k,k) = (15._rknd/6._rknd)*b + 2*c
             if(mod(k,n_theta) == 2) then ! angle index = 1
@@ -243,12 +244,12 @@ subroutine wave_fdlap_mat2
         !   Fill matrix for points from third circumference to
         !   second from last circumference
         !-----------------------------------------------------------------------
-        do k=n_theta+2,n_nodes-2*n_theta
+        do k=2*n_theta+2,n_nodes-2*n_theta
             i = (k-2)/n_theta + 1 ! retrive radial index
             rho = wave_rho(i*dr)
             a = (1._rknd/(i*dr**2))*d0**2/rho
             b = (1._rknd/dr**2)*d0**2/rho
-            c = (1._rknd/(dr*dtheta)**2)*d0**2/rho
+            c = (1._rknd/(i*dr*dtheta)**2)*d0**2/rho
 
             lap_mat(k,k) = (15._rknd/6._rknd)*b + 2*c
             if(mod(k,n_theta) == 2) then ! angle index = 1
@@ -275,7 +276,7 @@ subroutine wave_fdlap_mat2
             rho = wave_rho(i*dr)
             a = (1._rknd/(i*dr**2))*d0**2/rho
             b = (1._rknd/dr**2)*d0**2/rho
-            c = (1._rknd/(dr*dtheta)**2)*d0**2/rho
+            c = (1._rknd/(i*dr*dtheta)**2)*d0**2/rho
 
             lap_mat(k,k) = (15._rknd/6._rknd)*b + 2*c
             if(mod(k,n_theta) == 2) then ! angle index = 1
@@ -301,7 +302,7 @@ subroutine wave_fdlap_mat2
             rho = wave_rho(i*dr)
             a = (1._rknd/(i*dr**2))*d0**2/rho
             b = (1._rknd/dr**2)*d0**2/rho
-            c = (1._rknd/(dr*dtheta)**2)*d0**2/rho
+            c = (1._rknd/(i*dr*dtheta)**2)*d0**2/rho
 
             lap_mat(k,k) = 2*(b + c)
             if(mod(k,n_theta) == 2) then ! angle index = 1
