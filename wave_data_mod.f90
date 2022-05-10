@@ -29,7 +29,6 @@ module wave_data_mod
     !------------------------------------------------------------------
 
     integer(iknd) :: n_nodes
-    real(rknd), dimension(:), allocatable :: init_disp ! Initial displacement array
 
     real(rknd), dimension(:), allocatable :: w_r ! real part of eigenvalues
     real(rknd), dimension(:), allocatable :: w_im ! imaginary part of eigenvalues
@@ -80,14 +79,7 @@ module wave_data_mod
         do j_ang=0,n_theta-1
             ang_mesh(j_ang+1) = j_ang*dtheta
         end do
-
-        !--------------------------------------------------------------
-        !   Allocate initial displacement array
-        !--------------------------------------------------------------
         
-        allocate(init_disp(n_nodes))
-        
-
     end subroutine wave_data_init
 
 end module wave_data_mod

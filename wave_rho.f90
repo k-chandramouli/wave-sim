@@ -1,6 +1,7 @@
 !=======================================================================
-!   This subroutine populates the finite difference Laplacian matrix
-!   using mesh details. 
+!   This function implements the spatially varying density,
+!   takes the radius as input, and outputs rho0 or rho1 based
+!   on the input value.
 !=======================================================================
 
 function wave_rho(radius) result(rho)

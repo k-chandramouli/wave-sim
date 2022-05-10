@@ -50,13 +50,4 @@ module wave_inp_mod
     integer(iknd) :: n_theta=8_iknd
     integer(iknd) :: num_modes=10_iknd
 
-    !-----------------------------------------------------------------------
-    !   Initial condition parameters.
-    !-----------------------------------------------------------------------
-
-    ! How can the initial conditions be set? What's the cleanest way
-    ! of doing it? Initial conditions can be in terms of velocity
-    ! (partial_u/partial_t = phi(r,theta)) or it can be directly assigning
-    ! u(0,r,theta) = f(r,theta), which makes more sense?
-
 end module wave_inp_mod

@@ -70,7 +70,7 @@ program wave_driver
 
     if (fd_type == "first") then
         call wave_fdlap_mat
-    else if (fd_type == "second") then
+    else if (fd_type == "second") then ! Higher order FD approximations used
         call wave_fdlap_mat2
     else
         write(*,*) "Finite difference type not recognised!"

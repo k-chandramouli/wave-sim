@@ -31,9 +31,11 @@ FFLAGS_DBG = -g -fbounds-check
 LDRFLAGS = 
 
 # Library paths and libraries can be listed here.
+# Make sure library names and paths are set based on your
+# system setup before running the makefile. The values
+# below are for my setup (yours may differ).
 
 LIBDIR =  -L/usr/local/lib
-# LIBS = -llapack -lblas
 LIBS = -lopenblas -lpthread
 
 #-----------------------------------------------------------------------
@@ -107,4 +109,4 @@ clean:
 realclean: clean
 	-rm wave_exec wave_dbg
 	@echo "Cleaned executables from "$(PWD)"."
-
+	
