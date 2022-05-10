@@ -81,7 +81,7 @@ program wave_driver
     !   eigenvalues and eigenvectors
     !-----------------------------------------------------------------------
 
-    JOBVL='V'
+    JOBVL='N'
     JOBVR='V'
     LWORK = 5*n_nodes
     allocate(WORK(LWORK))
